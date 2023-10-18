@@ -5,7 +5,7 @@ public class Demo {
 	public static void main(String[] args) {
 		//前序遍历建树
 //		Integer[] arr = { 1, 2, 4, null, null, 5, null, null, 3, null, null };
-		Integer[] arr = { 1, 2, null,null,null};
+		Integer[] arr = { 1, 2, null,null,3,null,null};
 		BinaryTree tree = new BinaryTree(arr);
 		System.out.print("前序遍历(递归)：");
 		tree.preOrderRecur();

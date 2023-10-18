@@ -42,10 +42,12 @@ public class BinaryTree {
     }
 
     public void preOrderRecur(Node root) {
+        //判断当前节点是否为空，为空就跳过
         if (root == null) {
             return;
         }
         System.out.print(root.data + " -> ");
+        //先遍历左节点，如果左节点为null了，代表左节点到底了，所以网上找右节点的数据
         preOrderRecur(root.left);
         preOrderRecur(root.right);
     }
@@ -74,6 +76,7 @@ public class BinaryTree {
     }
 
     //中序遍历，递归
+    //左 根 右
     public void inOrderRecur() {
         inOrderRecur(root);
     }
@@ -87,12 +90,15 @@ public class BinaryTree {
         inOrderRecur(root.right);
     }
 
-    //中序遍历，非递归
+    //中序遍历，非递归，左 根 右
+    //入栈：先放根 再放左 这样 左就能先遍历
     public void inOrder() {
         Node current = root;
+        //利用LinkedList做栈
         LinkedList<Node> s = new LinkedList<Node>();
         while (current != null || !s.isEmpty()) {
             while (current != null) {
+                //左节点
                 s.addFirst(current);
                 current = current.left;
             }
@@ -105,6 +111,7 @@ public class BinaryTree {
     }
 
     //后序遍历，遍历
+    //左 右 根
     public void postOrderRecur() {
         postOrderRecur(root);
     }
