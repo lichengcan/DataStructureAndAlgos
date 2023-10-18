@@ -23,7 +23,7 @@ public class BinaryTree {
     private Node addAllRecur(Integer[] c) {
         //获取下一个值，size计数器
         Integer var = c[size++];
-        //判断当前节点是否空
+        //判断当前节点是否空,如果为空，代表没有子节点了
         if (var == null) {
             return null;
         }
