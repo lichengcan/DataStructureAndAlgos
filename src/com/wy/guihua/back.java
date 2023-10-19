@@ -53,16 +53,16 @@ public class back {
     }
 
     public static void main(String[] args) {
-//        Item[] items = {
-//                new Item("水", 3, 10),
-//                new Item("书", 1, 3),
-//                new Item("食物", 2, 9),
-//                new Item("夹克", 2, 5),
-//                new Item("相机", 1, 6)
-//        };
+        Item[] items = {
+                new Item("水", 3, 10),
+                new Item("书", 1, 3),
+                new Item("食物", 2, 9),
+                new Item("夹克", 2, 5),
+                new Item("相机", 1, 6)
+        };
         int capacity = 6;
-//        int[][] optimalItems = findOptimalItems(items, capacity);
-//        System.out.println("6========================"+optimalItems[items.length - 1][capacity]);
+        int[][] optimalItems = findOptimalItems(items, capacity);
+        System.out.println("6========================" + optimalItems[items.length - 1][capacity]);
 
         Item[] items1 = {
                 new Item("帐篷", 20, 100),
@@ -81,16 +81,16 @@ public class back {
         };
         int maxWeight = 150;
         int[][] optimalItems1 = findOptimalItems(items1, maxWeight);
-        System.out.println("150=============="+optimalItems1[items1.length - 1][maxWeight]);
+        System.out.println("150==============" + optimalItems1[items1.length - 1][maxWeight]);
 
         List<Item> selectedItems = maximizeValue(items1, maxWeight);
         System.out.println("Selected items:");
         int sum = 0;
         for (Item item : selectedItems) {
-            sum+=item.getValue();
+            sum += item.getValue();
             System.out.println(item.getName() + " - Weight: " + item.getWeight() + ", Value: " + item.getValue());
         }
-        System.out.println("150Max=============="+sum);
+        System.out.println("150Max==============" + sum);
     }
 
 
