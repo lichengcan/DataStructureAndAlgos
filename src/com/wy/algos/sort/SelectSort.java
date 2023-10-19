@@ -20,6 +20,10 @@ public class SelectSort {
 					min = j;
 				}
 			}
+			//min 定义的最小数
+			//num 是新找到的比min更小的数
+			//i 是 num对应的下标
+			//exec：将i下标和min下标的值进行互换
 			if(min!=i)
 				Utils.exec(num,i,min);
 		}
