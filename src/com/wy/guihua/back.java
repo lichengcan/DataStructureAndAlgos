@@ -1,5 +1,9 @@
 package com.wy.guihua;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author: lichengcan
  * @date: 2023-10-18 18:52
@@ -49,16 +53,74 @@ public class back {
     }
 
     public static void main(String[] args) {
-        Item[] items = {
-                new Item("水", 3, 10),
-                new Item("书", 1, 3),
-                new Item("食物", 2, 9),
-                new Item("夹克", 2, 5),
-                new Item("相机", 1, 6)
-        };
+//        Item[] items = {
+//                new Item("水", 3, 10),
+//                new Item("书", 1, 3),
+//                new Item("食物", 2, 9),
+//                new Item("夹克", 2, 5),
+//                new Item("相机", 1, 6)
+//        };
         int capacity = 6;
-        int[][] optimalItems = findOptimalItems(items, capacity);
-        System.out.println(optimalItems[items.length - 1][capacity]);
+//        int[][] optimalItems = findOptimalItems(items, capacity);
+//        System.out.println("6========================"+optimalItems[items.length - 1][capacity]);
+
+        Item[] items1 = {
+                new Item("帐篷", 20, 100),
+                new Item("水壶", 10, 60),
+                new Item("食品", 30, 120),
+                new Item("雨衣", 15, 70),
+                new Item("灯笼", 10, 50),
+                new Item("睡袋", 25, 80),
+                new Item("地图", 1, 150),
+                new Item("刀具", 5, 60),
+                new Item("防熊喷雾", 3, 40),
+                new Item("医疗包", 10, 100),
+                new Item("烹饪用具", 15, 60),
+                new Item("爬山绳索", 12, 80),
+                new Item("望远镜", 8, 100)
+        };
+        int maxWeight = 150;
+        int[][] optimalItems1 = findOptimalItems(items1, maxWeight);
+        System.out.println("150=============="+optimalItems1[items1.length - 1][maxWeight]);
+
+        List<Item> selectedItems = maximizeValue(items1, maxWeight);
+        System.out.println("Selected items:");
+        int sum = 0;
+        for (Item item : selectedItems) {
+            sum+=item.getValue();
+            System.out.println(item.getName() + " - Weight: " + item.getWeight() + ", Value: " + item.getValue());
+        }
+        System.out.println("150Max=============="+sum);
+    }
+
+
+    public static List<Item> maximizeValue(Item[] items, int maxWeight) {
+        int[][] dp = new int[items.length + 1][maxWeight + 1];
+
+        for (int i = 1; i <= items.length; i++) {
+            Item item = items[i - 1];
+            for (int j = 1; j <= maxWeight; j++) {
+                if (item.getWeight() > j) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], item.getValue() + dp[i - 1][j - item.getWeight()]);
+                }
+            }
+        }
+
+        // Backtracking to find the items included
+        List<Item> selectedItems = new ArrayList<>();
+        int remainingWeight = maxWeight;
+        for (int i = items.length; i > 0; i--) {
+            if (dp[i][remainingWeight] != dp[i - 1][remainingWeight]) {
+                Item item = items[i - 1];
+                selectedItems.add(item);
+                remainingWeight -= item.getWeight();
+            }
+        }
+
+        Collections.reverse(selectedItems);
+        return selectedItems;
     }
 
 }
