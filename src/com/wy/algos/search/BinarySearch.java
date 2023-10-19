@@ -39,8 +39,26 @@ public class BinarySearch {
     }
 
     private static int binarySearch1(int[] arr, int target) {
-
-        return 0;
+        //定义左右指针
+        int left = 0;
+        int right = arr.length - 1;
+        //循环条件：左指针<=右指针
+        while (left <= right) {
+            //定义一个temp指针 初始值为arr的一半
+            int temp = left + (right - left) / 2;
+            //判断temp元素是否等于target
+            if (arr[temp] == target) {
+                return temp;
+            }
+            //中间值 大于 目标值，目标值 中间值
+            if (arr[temp] > target)
+                //右指针左移
+                right=temp-1;
+            else
+                left=temp+1;
+        }
+        //找不到就 -1
+        return -1;
     }
 
     // 二分查找算法实现
@@ -53,11 +71,11 @@ public class BinarySearch {
             if (arr[mid] == target)
                 return mid;
 
-            // 如果目标值大于中间元素，则只考虑右半部分
+            // 中间值小于目标值，中间值在左，目标值在右，所有左指针往右边找
             if (arr[mid] < target)
                 left = mid + 1;
 
-                // 如果目标值小于中间元素，则只考虑左半部分
+            // 中间值大于目标值
             else
                 right = mid - 1;
         }
