@@ -36,6 +36,12 @@ public class BinarySearch {
         } else {
             System.out.println("Element found at index: " + result);
         }
+
+        if (result1 == -1) {
+            System.out.println("Element not present");
+        } else {
+            System.out.println("Element found at index: " + result1);
+        }
     }
 
     private static int binarySearch1(int[] arr, int target) {
