@@ -10,15 +10,37 @@ import java.util.List;
 public class back {
     public static List<Item> findOptimalItems(Item[] items, int capacity) {
 
-        for (int i = 0; i < capacity; i++) {
-            //每一层容量我都遍历一遍
-
-            //判断当前物品是否能放入
-
-            //判断是否更加值得放入
-
-
+        //两层for，第一层遍历行，就是 水、书、食物。。。。
+        //第二层遍历大小，将capacity分成1，2，3，4，5，6....小份的
+        //每次判断当前二维数组应该放什么值，和 (hang - 1, lie) 进行比较，如果加入当前行更大则替换
+        final int rowLength = items.length;
+        int[][] res = new int[rowLength][capacity+1];
+        for (int row = 0; row < items.length; row++) {
+            for (int col = 0; col <= capacity; col++) {
+                //判断当前物品是否能放入
+                Item item = items[row];
+                if (item.getWeight() <= col) {
+                    if (row > 0) {
+                        //当前价值 > 上一个容量价值
+                        if (item.getValue() > res[row - 1][col]) {
+                            res[row][col] = item.getValue();
+                        } else {
+                            res[row][col] = res[row - 1][col];
+                        }
+                    } else {
+                        //初始化
+                        res[row][col]=item.getValue();
+                    }
+                }else {
+                    //啥也放不了
+                    res[row][col]=0;
+                }
+            }
         }
+
+        //判断是否更加值得放入
+
+
         return null;
     }
 
